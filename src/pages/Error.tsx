@@ -1,13 +1,15 @@
+
 import Lottie from "lottie-react";
 import { Link, useRouteError } from "react-router-dom";
 import animation from "../assets/error.json";
 
 const Error = () => {
-  const { error } = useRouteError();
+  const error = useRouteError() as { message: string };
+
   return (
     <div>
       <div>
-        <div className="w-full  lg:w-1/2 lg:mx-auto">
+        <div className="w-full lg:w-1/2 lg:mx-auto">
           <Lottie animationData={animation} loop={true} />
         </div>
       </div>
