@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An e-commerce website for sporting goods built with React, Redux, TypeScript, Tailwind CSS, NodeJS, ExpressJS, Mongoose and other modern technologies.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Scripts](#scripts)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Display all available products
+- Search functionality for users to find specific products based on name
+- Filter functionality for users to find specific products based on sport category, price, brand, rating, etc.
+- Sorting options (ascending and descending by price)
+- "Clear filter" button to reset all filters
+- Add products to cart
+- Checkout process with billing details form
+- Order confirmation modal
+- Responsive design
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **React**: JavaScript library for building user interfaces
+- **Redux**: State management library
+- **Redux Toolkit**: Simplified Redux logic
+- **TypeScript**: Typed superset of JavaScript
+- **Tailwind CSS**: Utility-first CSS framework
+- **React Router**: Declarative routing for React
+- **React Modal**: Accessible modal dialog component
+- **React Toastify**: Notifications for React
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/) installed.
+
+### Installation
+
+1. Clone the repository
+   ```sh
+   git clone https://github.com/emayethossen/sporting-goods-client
