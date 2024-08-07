@@ -22,6 +22,12 @@ export const productsApi = createApi({
         url: "/products",
       }),
     }),
+    getSingleProduct: builder.query({
+      query: (_id) => ({
+        method: "GET",
+        url: `/products/${_id}`,
+      }),
+    }),
     addProduct: builder.mutation<Product, Partial<Product>>({
       query: (product) => ({
         url: "products",
@@ -50,4 +56,5 @@ export const {
   useAddProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetSingleProductQuery
 } = productsApi;

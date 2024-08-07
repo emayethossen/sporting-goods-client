@@ -1,185 +1,186 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState } from 'react';
 import {
   useGetProductsQuery,
-  useAddProductMutation,
-  useUpdateProductMutation,
   useDeleteProductMutation,
-  Product,
-} from "../redux/features/productsApi";
+} from '../redux/features/productsApi';
+import { toast } from 'react-toastify';
+import AddProductModal from '../components/Modal/AddProductModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const ManageProducts = () => {
-  const { data: products = [], error, isLoading } = useGetProductsQuery({});
-  const [addProduct] = useAddProductMutation();
-  const [updateProduct] = useUpdateProductMutation();
+const ManageProduct = () => {
+  const { data, isLoading, error, refetch } = useGetProductsQuery({});
   const [deleteProduct] = useDeleteProductMutation();
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const { register, handleSubmit, reset, setValue } =
-    useForm<Partial<Product>>();
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editProductId, setEditProductId] = useState(null);
+  const [productDetails, setProductDetails] = useState({
+    name: '',
+    price: 0,
+    description: '',
+    category: '',
+    stockQuantity: 0,
+    brand: '',
+    rating: 0,
+    image: '',
+  });
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
 
-  const onSubmit = async (data: Partial<Product>) => {
+  const handleDelete = async () => {
     try {
-      if (editingProduct) {
-        await updateProduct({ _id: editingProduct._id, ...data }).unwrap();
-        toast.success("Product updated successfully");
-      } else {
-        await addProduct(data).unwrap();
-        toast.success("Product added successfully");
-      }
-      reset();
-      setEditingProduct(null);
-    } catch (error: any) {
-      console.error("Error saving product:", error);
-      toast.error(
-        `Error saving product: ${error.data?.message || error.message}`
-      );
+      await deleteProduct(productToDelete).unwrap();
+      toast.success('Product deleted successfully');
+      setShowDeleteConfirm(false);
+      refetch();
+    } catch (error) {
+      toast.error('Error deleting product');
     }
   };
 
-  const onEdit = (product: Product) => {
-    setEditingProduct(product);
-    setValue("name", product.name);
-    setValue("category", product.category);
-    setValue("stockQuantity", product.stockQuantity);
-    setValue("brand", product.brand);
-    setValue("rating", product.rating);
-    setValue("description", product.description);
-    setValue("price", product.price);
-    setValue("image", product.image);
+  const handleEdit = (product) => {
+    setEditProductId(product._id);
+    setProductDetails({
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      category: product.category,
+      stockQuantity: product.stockQuantity,
+      brand: product.brand,
+      rating: product.rating,
+      image: product.image,
+    });
+    setShowEditModal(true);
   };
 
-  const onDelete = async (id: string) => {
-    try {
-      await deleteProduct(id).unwrap();
-      toast.success("Product deleted successfully");
-    } catch (error: any) {
-      console.error("Error deleting product:", error);
-      toast.error(
-        `Error deleting product: ${error.data?.message || error.message}`
-      );
-    }
+  const handleAddOrUpdateSuccess = () => {
+    setShowAddModal(false);
+    setShowEditModal(false);
+    refetch();
   };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products</div>;
+
+  const products = data?.data || [];
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Manage Products</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="mb-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            {...register("name")}
-            placeholder="Product Name"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("category")}
-            placeholder="Category"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("stockQuantity")}
-            type="number"
-            placeholder="Stock Quantity"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("brand")}
-            placeholder="Brand"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("rating")}
-            type="number"
-            step="0.1"
-            placeholder="Rating"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("description")}
-            placeholder="Description"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("price")}
-            type="number"
-            step="0.01"
-            placeholder="Price"
-            className="p-2 border rounded"
-          />
-          <input
-            {...register("image")}
-            placeholder="Image URL"
-            className="p-2 border rounded"
-          />
-        </div>
-        <button
-          type="submit"
-          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          {editingProduct ? "Update Product" : "Add Product"}
-        </button>
-        {editingProduct && (
-          <button
-            type="button"
-            onClick={() => {
-              reset();
-              setEditingProduct(null);
-            }}
-            className="mt-4 bg-gray-500 text-white py-2 px-4 rounded ml-4"
-          >
-            Cancel
-          </button>
-        )}
-      </form>
-
-      <div>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error loading products</p>
-        ) : (
-          Array.isArray(products) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products.map((product) => (
-                <div
-                  key={product._id}
-                  className="p-4 border rounded shadow flex flex-col"
-                >
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">Manage Products</h2>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+        onClick={() => setShowAddModal(true)}
+      >
+        Add Product
+      </button>
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                Price
+              </th>
+              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                Description
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {products.map((product) => (
+              <tr key={product._id}>
+                <td className="px-6 py-4 hidden md:table-cell">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="h-40 w-full object-cover rounded mb-2"
+                    className="w-16 h-16 object-cover"
                   />
-                  <h2 className="text-xl font-bold">{product.name}</h2>
-                  <p>{product.category}</p>
-                  <p>Brand: {product.brand}</p>
-                  <p>In Stock: {product.stockQuantity}</p>
-                  <p>Rating: {product.rating}</p>
-                  <p className="text-gray-600">{product.description}</p>
-                  <p className="font-bold">${product.price.toFixed(2)}</p>
+                </td>
+                <td className="px-6 py-4">{product.name}</td>
+                <td className="px-6 py-4 hidden md:table-cell">
+                  ${product.price.toFixed(2)}
+                </td>
+                <td className="px-6 py-4 text-center hidden md:table-cell">
+                  {product.description}
+                </td>
+                <td className="px-6 flex items-center justify-center gap-2 py-4">
                   <button
-                    onClick={() => onEdit(product)}
-                    className="mt-2 bg-yellow-500 text-white py-1 px-2 rounded"
+                    className="bg-green-500 text-white rounded px-3 py-2 flex items-center"
+                    onClick={() => handleEdit(product)}
                   >
-                    Edit
+                    <FontAwesomeIcon icon={faEdit} />
                   </button>
                   <button
-                    onClick={() => onDelete(product._id)}
-                    className="mt-2 bg-red-500 text-white py-1 px-2 rounded"
+                    className="bg-red-500 text-white px-3 py-2 rounded flex items-center"
+                    onClick={() => {
+                      setProductToDelete(product._id);
+                      setShowDeleteConfirm(true);
+                    }}
                   >
-                    Delete
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
-                </div>
-              ))}
-            </div>
-          )
-        )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      <ToastContainer />
+      {showAddModal && (
+        <AddProductModal
+          closeModal={() => setShowAddModal(false)}
+          onSuccess={handleAddOrUpdateSuccess}
+        />
+      )}
+
+      {showEditModal && (
+        <AddProductModal
+          productId={editProductId}
+          initialName={productDetails.name}
+          initialPrice={productDetails.price}
+          initialDescription={productDetails.description}
+          initialCategory={productDetails.category}
+          initialStockQuantity={productDetails.stockQuantity}
+          initialBrand={productDetails.brand}
+          initialRating={productDetails.rating}
+          initialImage={productDetails.image}
+          closeModal={() => setShowEditModal(false)}
+          onSuccess={handleAddOrUpdateSuccess}
+        />
+      )}
+
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+            <p>Are you sure you want to delete this product?</p>
+            <div className="mt-4 flex justify-end space-x-2">
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={() => setShowDeleteConfirm(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ManageProducts;
+export default ManageProduct;

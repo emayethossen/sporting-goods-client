@@ -1,17 +1,21 @@
+import img1 from '../assets/team/img1.jpg'
+import img2 from '../assets/team/img2.jpg'
+import img3 from '../assets/team/img3.jpg'
+
 const About = () => {
   return (
     <div className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-            About Us
+            About
           </h1>
           <p className="text-lg text-gray-600 mb-8">
             Welcome to our Sporting Goods Store. We are dedicated to providing
             high-quality equipment and accessories for all your sporting needs.
           </p>
         </div>
- 
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Mission */}
           <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -44,20 +48,20 @@ const About = () => {
             Meet Our Team
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Team Member 1 */}
+
             <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
               <img
-                src="/team1.jpg"
+                src={img2}
                 alt="Team Member 1"
                 className="w-32 h-32 rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-semibold text-gray-800">John Doe</h3>
               <p className="text-gray-600">Founder & CEO</p>
             </div>
-            {/* Team Member 2 */}
+
             <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
               <img
-                src="/team2.jpg"
+                src={img1}
                 alt="Team Member 2"
                 className="w-32 h-32 rounded-full mb-4 object-cover"
               />
@@ -66,10 +70,10 @@ const About = () => {
               </h3>
               <p className="text-gray-600">Head of Marketing</p>
             </div>
-            {/* Team Member 3 */}
+
             <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
               <img
-                src="/team3.jpg"
+                src={img3}
                 alt="Team Member 3"
                 className="w-32 h-32 rounded-full mb-4 object-cover"
               />
@@ -81,33 +85,8 @@ const About = () => {
           </div>
         </div>
 
-        {/* Contact Info */}
-        <div className="mt-12 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-4 text-center">
-            Contact Us
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <p className="text-lg text-gray-600 mb-4">
-                For any inquiries or feedback, feel free to reach out to us
-                using the contact information below.
-              </p>
-              <p className="text-lg font-semibold text-gray-800">Email</p>
-              <p className="text-gray-600">info@sportsstore.com</p>
-              <p className="text-lg font-semibold text-gray-800 mt-4">Phone</p>
-              <p className="text-gray-600">+1 123 456 7890</p>
-            </div>
-            <div className="text-center">
-              {/* Optional: Add a contact form here if needed */}
-              <button className="bg-primary text-white px-6 py-3 rounded-lg shadow-lg mt-4 inline-block">
-                Contact Form
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Store Location */}
-        <div className="mt-12 bg-white p-6 rounded-lg shadow-lg">
+        <div className='mt-12'>
           <h2 className="text-3xl font-extrabold text-gray-900 mb-4 text-center">
             Our Store Location
           </h2>
@@ -115,6 +94,10 @@ const About = () => {
             <p className="text-lg text-gray-600 mb-4">
               123 Sports Ave, Sportstown, ST 12345
             </p>
+          </div>
+
+          <div className="bg-blue-300 p-4 rounded-lg shadow-lg">
+
             <iframe
               title="Store Location"
               className="w-full h-64 rounded-lg"

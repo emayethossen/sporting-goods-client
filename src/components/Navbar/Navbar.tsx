@@ -1,7 +1,8 @@
 // src/components/Navbar.tsx
-import { MenuIcon, ShoppingCartIcon, XIcon } from 'lucide-react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { MenuIcon, ShoppingCartIcon, XIcon } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import webLogo from "../../assets/social-icon/nav-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,21 +17,39 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold">
-              <img src="/path/to/logo.png" alt="Logo" className="h-8 w-auto" />
+              <img src={webLogo} alt="Logo" className="h-8 w-auto" />
             </Link>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link to="/all-products" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+                <Link
+                  to="/"
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/all-products"
+                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                >
                   All Products
                 </Link>
-                <Link to="/manage-products" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+                <Link
+                  to="/manage-products"
+                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                >
                   Manage Products
                 </Link>
-                <Link to="/cart" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
-                  Cart
-                </Link>
-                <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+                <Link
+                  to="/about"
+                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                >
                   About
+                </Link>
+                <Link
+                  to="/contact"
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+                >
+                  Contact
                 </Link>
               </div>
             </div>
@@ -55,19 +74,37 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
+      <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to="/all-products" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">
+          <Link
+            to="/"
+            className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+          >
+            Home
+          </Link>
+          <Link
+            to="/all-products"
+            className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+          >
             All Products
           </Link>
-          <Link to="/manage-products" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">
+          <Link
+            to="/manage-products"
+            className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+          >
             Manage Products
           </Link>
-          <Link to="/cart" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">
-            Cart
+          <Link
+            to="/about"
+            className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+          >
+            About
           </Link>
-          <Link to="/about" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">
-            About Us
+          <Link
+            to="/contact"
+            className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+          >
+            Contact
           </Link>
         </div>
       </div>

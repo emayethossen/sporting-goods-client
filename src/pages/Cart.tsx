@@ -31,10 +31,17 @@ const Cart = () => {
     0
   );
 
+  // Calculate total price including VAT (15%)
+  const totalWithVat = totalPrice * 1.15;
+
+  // Check if any item is out of stock
+  const isCartEmpty = cartItems.length === 0;
+  const hasOutOfStockItem = cartItems.some((item) => item.stockQuantity === 0);
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
-      {cartItems.length === 0 ? (
+      {isCartEmpty ? (
         <p>Your cart is empty</p>
       ) : (
         <>
@@ -49,7 +56,7 @@ const Cart = () => {
               Clear Cart
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {cartItems.map((item) => (
               <div key={item._id} className="bg-white shadow-md rounded-lg p-4">
                 <img
@@ -60,14 +67,17 @@ const Cart = () => {
                 <h2 className="text-lg font-bold mt-2">{item.name}</h2>
                 <p className="text-gray-600">{item.category}</p>
                 <p className="text-gray-600">Brand: {item.brand}</p>
-                <p className="text-gray-600">Price: ${item.price.toFixed(2)}</p>
+                <p className="text-gray-600">Price: ${item.price}</p>
                 <p className="text-gray-600">In Stock: {item.stockQuantity}</p>
                 <div className="flex items-center mt-2">
                   <button
                     onClick={() =>
                       handleQuantityChange(item._id, item.quantity - 1)
                     }
-                    className="bg-gray-300 text-black py-1 px-3 rounded-l"
+                    className={`bg-gray-300 text-black py-1 px-3 rounded-l ${
+                      item.quantity === 1 ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                    disabled={item.quantity === 1}
                   >
                     -
                   </button>
@@ -81,7 +91,12 @@ const Cart = () => {
                     onClick={() =>
                       handleQuantityChange(item._id, item.quantity + 1)
                     }
-                    className="bg-gray-300 text-black py-1 px-3 rounded-r"
+                    className={`bg-gray-300 text-black py-1 px-3 rounded-r ${
+                      item.quantity === item.stockQuantity
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
+                    disabled={item.quantity === item.stockQuantity}
                   >
                     +
                   </button>
@@ -95,13 +110,26 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <div className="mt-4">
-            <Link
-              to="/checkout"
-              className="bg-blue-500 text-white py-2 px-4 rounded"
-            >
-              Proceed to Checkout
-            </Link>
+          <div className="mt-4 mb-6">
+            <p className="text-lg font-semibold mb-4">
+              Total with VAT (15%): ${totalWithVat.toFixed(2)}
+            </p>
+            {!hasOutOfStockItem && (
+              <Link
+                to="/checkout"
+                className="bg-blue-500 text-white py-2 px-4 rounded"
+              >
+                Proceed to Checkout
+              </Link>
+            )}
+            {hasOutOfStockItem && (
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded opacity-50 cursor-not-allowed"
+                disabled
+              >
+                Proceed to Checkout
+              </button>
+            )}
           </div>
         </>
       )}

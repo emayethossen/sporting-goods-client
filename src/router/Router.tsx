@@ -3,14 +3,18 @@ import About from "@/pages/About";
 import AllProducts from "@/pages/AllProducts";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
+import Contact from "@/pages/Contact";
+import Error from "@/pages/Error";
 import Home from "@/pages/Home";
 import ManageProducts from "@/pages/ManageProducts";
 import SingleProduct from "@/pages/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -39,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },
