@@ -2,7 +2,21 @@ import { useState, useEffect } from "react";
 import { useAddProductMutation, useUpdateProductMutation } from "../../redux/features/productsApi";
 import { toast } from "react-toastify";
 
-const AddProductModal = ({
+interface AddProductModalProps {
+  productId?: string;
+  initialName?: string;
+  initialPrice?: number;
+  initialDescription?: string;
+  initialCategory?: string;
+  initialStockQuantity?: number;
+  initialBrand?: string;
+  initialRating?: number;
+  initialImage?: string;
+  closeModal: () => void;
+  onSuccess: () => void;
+}
+
+const AddProductModal: React.FC<AddProductModalProps> = ({
   productId,
   initialName = "",
   initialPrice = 0,

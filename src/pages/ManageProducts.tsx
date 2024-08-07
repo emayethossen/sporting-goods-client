@@ -8,13 +8,25 @@ import AddProductModal from '../components/Modal/AddProductModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+interface Product {
+  _id?: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  stockQuantity: number;
+  brand: string;
+  rating: number;
+  image: string;
+}
+
 const ManageProduct = () => {
   const { data, isLoading, error, refetch } = useGetProductsQuery({});
   const [deleteProduct] = useDeleteProductMutation();
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editProductId, setEditProductId] = useState(null);
-  const [productDetails, setProductDetails] = useState({
+  const [editProductId, setEditProductId] = useState<string | null>(null);
+  const [productDetails, setProductDetails] = useState<Partial<Product>>({
     name: '',
     price: 0,
     description: '',
@@ -25,21 +37,23 @@ const ManageProduct = () => {
     image: '',
   });
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [productToDelete, setProductToDelete] = useState(null);
+  const [productToDelete, setProductToDelete] = useState<string | null>(null);
 
   const handleDelete = async () => {
-    try {
-      await deleteProduct(productToDelete).unwrap();
-      toast.success('Product deleted successfully');
-      setShowDeleteConfirm(false);
-      refetch();
-    } catch (error) {
-      toast.error('Error deleting product');
+    if (productToDelete) {
+      try {
+        await deleteProduct(productToDelete).unwrap();
+        toast.success('Product deleted successfully');
+        setShowDeleteConfirm(false);
+        refetch();
+      } catch (error) {
+        toast.error('Error deleting product');
+      }
     }
   };
 
-  const handleEdit = (product) => {
-    setEditProductId(product._id);
+  const handleEdit = (product: Product) => {
+    setEditProductId(product._id || null);
     setProductDetails({
       name: product.name,
       price: product.price,
@@ -95,7 +109,7 @@ const ManageProduct = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product) => (
+            {products.map((product: Product) => (
               <tr key={product._id}>
                 <td className="px-6 py-4 hidden md:table-cell">
                   <img
@@ -121,7 +135,7 @@ const ManageProduct = () => {
                   <button
                     className="bg-red-500 text-white px-3 py-2 rounded flex items-center"
                     onClick={() => {
-                      setProductToDelete(product._id);
+                      setProductToDelete(product._id || null); 
                       setShowDeleteConfirm(true);
                     }}
                   >
@@ -143,15 +157,15 @@ const ManageProduct = () => {
 
       {showEditModal && (
         <AddProductModal
-          productId={editProductId}
-          initialName={productDetails.name}
-          initialPrice={productDetails.price}
-          initialDescription={productDetails.description}
-          initialCategory={productDetails.category}
-          initialStockQuantity={productDetails.stockQuantity}
-          initialBrand={productDetails.brand}
-          initialRating={productDetails.rating}
-          initialImage={productDetails.image}
+          productId={editProductId || undefined} 
+          initialName={productDetails.name || ''}
+          initialPrice={productDetails.price || 0}
+          initialDescription={productDetails.description || ''}
+          initialCategory={productDetails.category || ''}
+          initialStockQuantity={productDetails.stockQuantity || 0}
+          initialBrand={productDetails.brand || ''}
+          initialRating={productDetails.rating || 0}
+          initialImage={productDetails.image || ''}
           closeModal={() => setShowEditModal(false)}
           onSuccess={handleAddOrUpdateSuccess}
         />

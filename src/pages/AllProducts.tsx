@@ -19,7 +19,7 @@ const AllProducts = () => {
   const [rating, setRating] = useState(0);
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemsPerPage] = useState(9);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
