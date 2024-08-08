@@ -14,7 +14,7 @@ export type Product = {
 
 export const productsApi = createApi({
   reducerPath: "productsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://sporting-goods-server-murex.vercel.app/api" }),
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => ({
