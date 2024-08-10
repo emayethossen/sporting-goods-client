@@ -1,11 +1,9 @@
-
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../redux/features/productsApi";
 import ReactStars from "react-stars";
 import { Product } from "../ProductData/Product";
 
-const FeaturedProducts: React.FC = () => {
+const FeaturedProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery({});
   const navigate = useNavigate();
 
@@ -24,7 +22,7 @@ const FeaturedProducts: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-3xl font-bold mb-4">Featured Products</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">Featured Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {products.slice(0, 6).map((product: Product) => (
           <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
