@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { clearCart, updateProductStock } from "../redux/features/cartSlice";
-import { toast } from "react-toastify"; // Ensure you have react-toastify imported for displaying notifications
+import { toast } from "react-toastify";
 import Modal from "react-modal";
 
-Modal.setAppElement('#root'); // Set the root element for accessibility
+Modal.setAppElement('#root');
 
 const Checkout = () => {
   const [userDetails, setUserDetails] = useState({
@@ -15,7 +15,7 @@ const Checkout = () => {
     phone: "",
     address: "",
   });
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ const Checkout = () => {
   const handlePlaceOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Check if all required fields are filled
     if (!userDetails.name || !userDetails.email || !userDetails.phone || !userDetails.address) {
       toast.error("Please fill out all required fields.");
       return;
@@ -58,7 +57,7 @@ const Checkout = () => {
   const totalWithVat = totalPrice * 1.15;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container lg:w-5/6 mx-auto mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Checkout</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>

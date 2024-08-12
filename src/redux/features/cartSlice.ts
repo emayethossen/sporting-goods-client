@@ -14,7 +14,7 @@ export interface CartItem {
   quantity: number;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
 }
 
@@ -69,7 +69,6 @@ const cartSlice = createSlice({
   },
 });
 
-// Export actions
 export const {
   addToCart,
   removeFromCart,

@@ -6,11 +6,11 @@ import webLogo from '../../assets/social-icon/nav-logo.png'
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 pt-6">
+    <div className="bg-[#E0F7FA] pt-6 text-[#121416]">
       <div className="flex justify-center">
         <img src={webLogo} alt="" className="w-[200px] h-[120px]" />
       </div>
-      <footer className="grid lg:grid-cols-4 gap-12 md:grid-cols-2 w-3/4 p-10 mx-auto text-white">
+      <footer className="grid lg:grid-cols-4 gap-12 md:grid-cols-2 w-3/4 p-10 mx-auto ">
         <div className="text-center lg:text-left space-y-4">
           <h2 className="footer-title font-bold text-2xl">Our Social Links</h2>
           <div className="space-y-6">
@@ -55,16 +55,16 @@ const Footer = () => {
         <div className="text-center lg:text-left space-y-4 hidden lg:flex flex-col">
           <h2 className="footer-title font-bold text-2xl">Product</h2>
           <Link to="/" className="link link-hover block">
-            Kids Toy
+            Football
           </Link>
           <Link to="/" className="link link-hover block">
-            Animals Toy
+            Cricket
           </Link>
           <Link to="/" className="link link-hover block">
-            Sports Toy
+            Chess
           </Link>
           <Link to="/" className="link link-hover block">
-            Dolls
+            Others
           </Link>
         </div>
         <div className="text-center lg:text-left space-y-4">
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
       </footer>
       <hr className="border w-3/4 mx-auto mt-6" />
-      <div className="w-3/4 text-sm text-white mx-auto flex justify-between py-12">
+      <div className="w-3/4 text-sm font-semibold mx-auto flex justify-between py-12">
         <p>@2024 Sporty Quest. All Rights Reserved</p>
         <p className="text-right">Powered by EMAYET</p>
       </div>

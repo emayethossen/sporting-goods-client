@@ -34,12 +34,11 @@ const Cart = () => {
   // Calculate total price including VAT (15%)
   const totalWithVat = totalPrice * 1.15;
 
-  // Check if any item is out of stock
   const isCartEmpty = cartItems.length === 0;
   const hasOutOfStockItem = cartItems.some((item) => item.stockQuantity === 0);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container lg:w-5/6 mx-auto mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
       {isCartEmpty ? (
         <p>Your cart is empty</p>
@@ -74,9 +73,8 @@ const Cart = () => {
                     onClick={() =>
                       handleQuantityChange(item._id, item.quantity - 1)
                     }
-                    className={`bg-gray-300 text-black py-1 px-3 rounded-l ${
-                      item.quantity === 1 ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
+                    className={`bg-gray-300 text-black py-1 px-3 rounded-l ${item.quantity === 1 ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
                     disabled={item.quantity === 1}
                   >
                     -
@@ -91,11 +89,10 @@ const Cart = () => {
                     onClick={() =>
                       handleQuantityChange(item._id, item.quantity + 1)
                     }
-                    className={`bg-gray-300 text-black py-1 px-3 rounded-r ${
-                      item.quantity === item.stockQuantity
+                    className={`bg-gray-300 text-black py-1 px-3 rounded-r ${item.quantity === item.stockQuantity
                         ? "opacity-50 cursor-not-allowed"
                         : ""
-                    }`}
+                      }`}
                     disabled={item.quantity === item.stockQuantity}
                   >
                     +

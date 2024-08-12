@@ -9,7 +9,6 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
     toast.success("Message sent successfully!");
     setName("");
     setEmail("");
@@ -17,7 +16,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="lg:w-5/6 mx-auto bg-white p-6 rounded-lg shadow-md">
       <section className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
         <p className="text-lg lg:w-1/2 mx-auto text-gray-700">
@@ -90,26 +89,6 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
-
-
-
-{/* <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
-        <div className="">
-          <div className="flex gap-2 items-center">
-          <FontAwesomeIcon icon={faEnvelope} className="text-gray-500 mr-2" />
-          <p className="text-gray-700 mr-6">email@example.com</p>
-          </div>
-          <div className="flex gap-2 items-center">
-          <FontAwesomeIcon icon={faPhone} className="text-gray-500 mr-2" />
-          <p className="text-gray-700 mr-6">+123 456 7890</p>
-          </div>
-          <div className="flex gap-2 items-center">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-500 mr-2" />
-          <p className="text-gray-700">123 Main Street, City, Country</p>
-          </div>
-        </div>
-      </section> */}
 
 
 

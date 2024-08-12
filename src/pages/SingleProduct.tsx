@@ -55,7 +55,7 @@ const SingleProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container lg:w-5/6 mx-auto mx-auto p-4">
       <div className="flex flex-col md:flex-row items-center bg-white rounded-lg shadow-lg p-6">
         <img
           src={image || ""}

@@ -10,7 +10,9 @@ const MainLayout = () => {
     <div className="">
       <ToastContainer />
       <Navbar />
-      <Outlet ></Outlet>
+      <div className="bg-[#EFF6FF]">
+        <Outlet ></Outlet>
+      </div>
       <Footer />
     </div>
   );

@@ -13,16 +13,20 @@ const ProductCard = ({ product }: { product: any }) => {
       <h2 className="text-lg font-bold mt-2">{product.name}</h2>
       <p className="text-gray-600">{product.category}</p>
       <p className="text-gray-600">Brand: {product.brand}</p>
-      <p className="text-gray-600">In Stock: {product.stockQuantity}</p>
-      <ReactStars
-        count={5}
-        value={product.rating}
-        size={24}
-        color2={"#ffd700"}
-        edit={false}
-      />
-      <p className="text-gray-600 mt-2">{product.description}</p>
-      <p className="text-gray-800 font-bold mt-2">${product.price}</p>
+      <div className="flex justify-between">
+        <p className="text-gray-800 font-bold mt-2">${product.price}</p>
+        <div className="flex gap-2 items-center">
+          <ReactStars
+            count={5}
+            value={product.rating}
+            size={24}
+            color2={"#ffd700"}
+            edit={false}
+          />
+          <p>(98 reviews)</p>
+        </div>
+
+      </div>
       <Link
         to={`/product/${product._id}`}
         className="bg-blue-500 text-white py-2 px-4 rounded mt-4 inline-block"

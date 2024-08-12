@@ -64,7 +64,7 @@ const AllProducts = () => {
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container lg:w-5/6 mx-auto mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">All Products</h1>
       <div className="flex flex-col md:flex-row md:space-x-4 mb-4">
         <input
