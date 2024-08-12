@@ -11,7 +11,9 @@ const Home = () => {
       <SliderSection />
       <div className="lg:w-5/6 mx-auto">
       <FeaturedProducts />
+      <div className="hidden lg:flex">
       <DiscoverProducts />
+      </div>
       <HeroSection />
       <ImageGallery />
       </div>

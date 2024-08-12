@@ -23,7 +23,7 @@ const ImageGallery = () => {
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div>
+                <div className='hidden md:flex'>
                     <img
                         src={img2}
                         alt="Image 5"
@@ -37,21 +37,21 @@ const ImageGallery = () => {
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div>
+                <div className='hidden md:flex'>
                     <img
                         src={img4}
                         alt="Image 7"
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div>
+                <div className='hidden md:flex'>
                     <img
                         src={img5}
                         alt="Image 7"
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
+                <div className="hidden md:flex sm:col-span-2 md:col-span-2 lg:col-span-2">
                     <img
                         src={img6}
                         alt="Image 8"
@@ -66,14 +66,14 @@ const ImageGallery = () => {
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
+                <div className="hidden md:flex sm:col-span-2 md:col-span-2 lg:col-span-2">
                     <img
                         src={img8}
                         alt="Image 6"
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                 </div>
-                <div>
+                <div className='hidden md:flex'>
                     <img
                         src={img9}
                         alt="Image 8"
