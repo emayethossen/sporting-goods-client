@@ -18,7 +18,7 @@ const SingleProduct = () => {
 
   if (isLoading) {
     return <div className="flex justify-center items-center min-h-screen">
-      <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+      <div className="loader ease-linear rounded-full border-8 border-t-8 border-emerald-300 h-32 w-32"></div>
     </div>;
   }
 
