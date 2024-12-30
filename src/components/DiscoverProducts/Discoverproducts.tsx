@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Link } from 'react-router-dom';
 
 const DiscoverProducts = () => {
   const products = [
@@ -23,7 +24,7 @@ const DiscoverProducts = () => {
     },
     {
       title: 'Explore new arrivals',
-      description: 'Shop the latest from top brands',
+      description: 'Shop the top brands',
       backgroundColor: '#EFF6FF',
     },
     {
@@ -39,8 +40,8 @@ const DiscoverProducts = () => {
   ];
 
   return (
-    <div>
-      <h1 className='text-3xl text-gray-600 font-bold p-4 my-8'>
+    <div className='container mx-auto'>
+      <h1 className='text-3xl text-gray-600 font-bold mb-4'>
         <span className='text-gray-500'>Discover more.</span> Good things are waiting for you
       </h1>
 
@@ -61,9 +62,11 @@ const DiscoverProducts = () => {
                     <p className="text-2xl font-bold text-gray-800 mb-4">
                       {product.description}
                     </p>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                    <Link to='/products'>
+                    <button className="bg-gradient-to-r from-[#6495ED] to-[#4A90E2] hover:bg-gradient-to-r hover:from-[#7EC8F4] hover:to-[#6495ED] text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
                       Show All
                     </button>
+                    </Link>
                   </CardContent>
                   <div className="flex justify-center items-center mr-4">
                     <img

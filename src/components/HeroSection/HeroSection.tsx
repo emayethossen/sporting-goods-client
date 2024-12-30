@@ -3,7 +3,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import img from '../../assets/images/man.png'
 const HeroSection = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between p-6 rounded-xl my-8 md:p-12 bg-[#F8FAFC]">
+    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between p-6 rounded-xl my-8 md:p-12 bg-[#F8FAFC]">
 
       <div className="md:w-1/2 space-y-4 text-center md:text-left">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">

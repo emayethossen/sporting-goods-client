@@ -12,9 +12,9 @@ import img11 from '../../assets/images/img2.jpg';
 
 const ImageGallery = () => {
     return (
-        <div className='py-8'>
-            <h2 className="text-2xl font-bold text-center mb-6">Image Gallery</h2>
-            <div className="rounded-2xl p-6 grid bg-[#F8FAFC] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className='px-8 mb-8'>
+            <h2 className="text-2xl font-bold text-center mb-8">Image Gallery</h2>
+            <div className="rounded-2xl grid bg-[#F8FAFC] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
 
                 <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
                     <img

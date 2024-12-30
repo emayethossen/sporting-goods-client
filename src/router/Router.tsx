@@ -6,9 +6,19 @@ import Checkout from "@/pages/Checkout";
 import Contact from "@/pages/Contact";
 import Error from "@/pages/Error";
 import Home from "@/pages/Home";
-import ManageProducts from "@/pages/ManageProducts";
+import Login from "@/pages/Login";
+import ManageProducts from "@/pages/admin/ManageProducts";
+import Register from "@/pages/Register";
 import SingleProduct from "@/pages/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
+import ManageBlog from "@/pages/admin/ManageBlog";
+import AllBlogs from "@/components/Blogcard/AllBlog";
+import BlogDetails from "@/components/Blogcard/SingleBlog";
+import CreatePost from "@/pages/admin/CreateBlog";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+import Dashboard from "@/pages/admin/Dashboard";
+import Profile from "@/pages/admin/Profile";
+import ManageUser from "@/pages/admin/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +31,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/all-products",
+        path: "/products",
         element: <AllProducts />,
       },
       {
@@ -48,8 +58,55 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/blogs",
+        element: <AllBlogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
+      },
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard />,
+    children:[
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "blogs",
+        element: <ManageBlog />,
+      },
+      {
+        path: "products",
+        element: <ManageProducts />,
+      },
+      {
+        path: "users",
+        element: <ManageUser />,
+      },
+      {
+        path: "create-blog",
+        element: <CreatePost />,
+      },
+    ]
+  },
+  
 ]);
 
 export default router;

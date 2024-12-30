@@ -28,7 +28,7 @@ export function SliderSection() {
   ];
 
   return (
-    <div className="relative w-full h-[500px]">
+    <div className="container mx-auto relative w-full h-[500px]">
       <Carousel
         className=" overflow-hidden rounded-lg shadow-lg"
         plugins={[

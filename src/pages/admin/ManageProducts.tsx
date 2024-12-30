@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import {
-  useGetProductsQuery,
-  useDeleteProductMutation,
-} from '../redux/features/productsApi';
+import { useGetProductsQuery, useDeleteProductMutation } from '../../redux/features/productsApi';
 import { toast } from 'react-toastify';
-import AddProductModal from '../components/Modal/AddProductModal';
+import AddProductModal from '../../components/Modal/AddProductModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -74,28 +71,31 @@ const ManageProduct = () => {
   };
 
   if (isLoading) return (
-    <div className="flex justify-center items-center h-screen">
-    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
-  </div>
+    <div className="flex justify-center items-center py-10">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
+    </div>
   );
   if (error) return <div>Error loading products</div>;
 
   const products = data?.data || [];
 
   return (
-    <div className="lg:w-5/6 mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Manage Products</h2>
+    <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-3xl font-bold text-center mb-6">Manage Products</h2>
+      <div className='flex justify-end mb-4'>
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+        className="py-3 px-6 bg-gradient-to-r from-[#F95C6B] to-[#E51284] text-white rounded-md font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
         onClick={() => setShowAddModal(true)}
       >
         Add Product
       </button>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+      </div>
+
+      <div className="overflow-x-auto rounded-lg shadow-lg">
+        <table className="min-w-full table-auto">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                 Image
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -103,9 +103,6 @@ const ManageProduct = () => {
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                 Price
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                Description
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -115,29 +112,26 @@ const ManageProduct = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product: Product) => (
               <tr key={product._id}>
-                <td className="px-6 py-4 hidden md:table-cell">
+                <td className="px-6 py-4 hidden sm:table-cell">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-16 h-16 object-cover"
+                    className="w-16 h-16 object-cover rounded"
                   />
                 </td>
                 <td className="px-6 py-4">{product.name}</td>
                 <td className="px-6 py-4 hidden md:table-cell">
                   ${product.price.toFixed(2)}
                 </td>
-                <td className="px-6 py-4 text-center hidden md:table-cell">
-                  {product.description}
-                </td>
-                <td className="px-6 flex items-center justify-center gap-2 py-4">
+                <td className="px-6 py-4 text-center flex justify-center items-center gap-4">
                   <button
-                    className="bg-green-500 text-white rounded px-3 py-2 flex items-center"
+                    className="bg-green-500 text-white px-4 py-2 rounded-md flex items-center"
                     onClick={() => handleEdit(product)}
                   >
                     <FontAwesomeIcon icon={faEdit} />
                   </button>
                   <button
-                    className="bg-red-500 text-white px-3 py-2 rounded flex items-center"
+                    className="bg-red-500 text-white px-4 py-2 rounded-md flex items-center"
                     onClick={() => {
                       setProductToDelete(product._id || null); 
                       setShowDeleteConfirm(true);
@@ -161,7 +155,7 @@ const ManageProduct = () => {
 
       {showEditModal && (
         <AddProductModal
-          productId={editProductId || undefined} 
+          productId={editProductId || undefined}
           initialName={productDetails.name || ''}
           initialPrice={productDetails.price || 0}
           initialDescription={productDetails.description || ''}
@@ -176,8 +170,8 @@ const ManageProduct = () => {
       )}
 
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
             <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
             <p>Are you sure you want to delete this product?</p>
             <div className="mt-4 flex justify-end space-x-2">
