@@ -10,13 +10,23 @@ import { useLoginMutation } from '../redux/features/authApi';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Predefined credentials for admin and user
+  const adminCredentials = {
+    email: 'admin@example.com',
+    password: 'admin123',
+  };
 
+  const userCredentials = {
+    email: 'user@example.com',
+    password: 'user123',
+  };
 
+  // Handle login form submission
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
@@ -52,6 +62,18 @@ const Login = () => {
     }
   };
 
+  // Functions to fill the email and password based on role
+  const fillAdminCredentials = () => {
+    setEmail(adminCredentials.email);
+    setPassword(adminCredentials.password);
+    setErrorMessage(''); // Reset error message on auto-fill
+  };
+
+  const fillUserCredentials = () => {
+    setEmail(userCredentials.email);
+    setPassword(userCredentials.password);
+    setErrorMessage(''); // Reset error message on auto-fill
+  };
 
   return (
     <div className="container mx-auto grid lg:grid-cols-2 shadow-2xl rounded lg:px-36 lg:py-16 p-6 bg-[#ffe5ea]">
@@ -61,12 +83,12 @@ const Login = () => {
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 flex items-center gap-2">
-          <Link  className="p-2 rounded text-white bg-green-500 font-semibold" to='/'>Back to Homepage</Link>
+          <Link className="p-2 rounded text-white bg-green-500 font-semibold" to='/'>Back to Homepage</Link>
         </div>
         <div className="relative z-10 text-white mb-6">
           <h2 className="text-2xl font-semibold">Sport Quest</h2>
           <p className="mt-2">
-          Your one-stop shop for premium sports gear, apparel, and accessories—designed to boost your game and style!
+            Your one-stop shop for premium sports gear, apparel, and accessories—designed to boost your game and style!
           </p>
         </div>
       </div>
@@ -74,6 +96,23 @@ const Login = () => {
       <div className="lg:border w-full lg:p-14 p-6 bg-white">
         <h2 className="md:text-3xl text-xl font-bold text-center uppercase">Sport Quest</h2>
         <p className="md:text-xl text-lg mb-6 font-bold text-center">Sign In To Your Account</p>
+
+        {/* Buttons to auto-fill credentials */}
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            className="btn btn-outline w-[120px] rounded flex justify-center items-center bg-gray-500 text-white"
+            onClick={fillAdminCredentials}
+          >
+            Admin Credentials
+          </button>
+          <button
+            className="btn btn-outline w-[120px] rounded flex justify-center items-center bg-blue-500 text-white"
+            onClick={fillUserCredentials}
+          >
+            User Credentials
+          </button>
+        </div>
+
         <div className="grid grid-cols-4 md:w-1/2 w-3/4 mx-auto justify-center items-center gap-2">
           <button className="btn btn-outline w-[32px] md:w-[48px] rounded flex justify-center items-center h-[32px] md:h-[48px] bg-red-500">
             <FontAwesomeIcon icon={faGoogle} className="text-white p-4 rounded bg-red-500" />
@@ -133,6 +172,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

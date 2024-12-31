@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetProductsQuery, useDeleteProductMutation } from '../../redux/features/productsApi';
 import { toast } from 'react-toastify';
 import AddProductModal from '../../components/Modal/AddProductModal';
@@ -18,6 +18,7 @@ interface Product {
 }
 
 const ManageProduct = () => {
+  // States for managing the product list, pagination, and modals
   const { data, isLoading, error, refetch } = useGetProductsQuery({});
   const [deleteProduct] = useDeleteProductMutation();
   const [showAddModal, setShowAddModal] = useState(false);
@@ -36,19 +37,26 @@ const ManageProduct = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
 
+  // States for managing pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);  // Define how many items you want per page
+  const [paginatedProducts, setPaginatedProducts] = useState<Product[]>([]);
+
+  // Handle deleting a product
   const handleDelete = async () => {
     if (productToDelete) {
       try {
         await deleteProduct(productToDelete).unwrap();
         toast.success('Product deleted successfully');
         setShowDeleteConfirm(false);
-        refetch();
+        refetch();  // Re-fetch products after delete
       } catch (error) {
         toast.error('Error deleting product');
       }
     }
   };
 
+  // Handle editing a product
   const handleEdit = (product: Product) => {
     setEditProductId(product._id || null);
     setProductDetails({
@@ -64,11 +72,23 @@ const ManageProduct = () => {
     setShowEditModal(true);
   };
 
+  // Handle success after adding or updating a product
   const handleAddOrUpdateSuccess = () => {
     setShowAddModal(false);
     setShowEditModal(false);
-    refetch();
+    refetch();  // Re-fetch products after adding or editing
   };
+
+  // Pagination logic
+  useEffect(() => {
+    if (data) {
+      const products = data.data || [];
+      const indexOfLastProduct = currentPage * pageSize;
+      const indexOfFirstProduct = indexOfLastProduct - pageSize;
+      const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+      setPaginatedProducts(currentProducts);
+    }
+  }, [data, currentPage, pageSize]);
 
   if (isLoading) return (
     <div className="flex justify-center items-center py-10">
@@ -78,17 +98,26 @@ const ManageProduct = () => {
   if (error) return <div>Error loading products</div>;
 
   const products = data?.data || [];
+  const totalItems = products.length;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  // Pagination control functions
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl font-bold text-center mb-6">Manage Products</h2>
-      <div className='flex justify-end mb-4'>
-      <button
-        className="py-3 px-6 bg-gradient-to-r from-[#F95C6B] to-[#E51284] text-white rounded-md font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
-        onClick={() => setShowAddModal(true)}
-      >
-        Add Product
-      </button>
+      <div className="flex justify-end mb-4">
+        <button
+          className="py-3 px-6 bg-gradient-to-r from-[#F95C6B] to-[#E51284] text-white rounded-md font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+          onClick={() => setShowAddModal(true)}
+        >
+          Add Product
+        </button>
       </div>
 
       <div className="overflow-x-auto rounded-lg shadow-lg">
@@ -110,7 +139,7 @@ const ManageProduct = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product: Product) => (
+            {paginatedProducts.map((product: Product) => (
               <tr key={product._id}>
                 <td className="px-6 py-4 hidden sm:table-cell">
                   <img
@@ -144,6 +173,27 @@ const ManageProduct = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6">
+        <button
+          className="px-4 py-2 bg-gray-500 text-white rounded-l-md"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <span className="px-4 py-2 text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          className="px-4 py-2 bg-gray-500 text-white rounded-r-md"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
 
       {showAddModal && (

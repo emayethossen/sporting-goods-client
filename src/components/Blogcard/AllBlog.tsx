@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { format } from "date-fns";
 
 interface Blog {
@@ -103,16 +102,6 @@ const AllBlogs: React.FC = () => {
                                             Read More
                                         </button>
 
-                                        {/* <div className="flex items-center text-gray-600 space-x-4 mr-6">
-                                            <div className="flex items-center">
-                                                <ThumbsUp className="w-5 h-5 mr-1" />
-                                                <span>{blog.upvotes}</span>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <ThumbsDown className="w-5 h-5 mr-1" />
-                                                <span>{blog.downvotes}</span>
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>

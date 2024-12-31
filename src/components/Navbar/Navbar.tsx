@@ -108,28 +108,28 @@ const Navbar = () => {
                     {user && user.role === 'user' && (
                       <>
                         <Link
-                          to="/profile"
+                          to="/user/dashboard"
+                          className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]"
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          to="/user/profile"
                           className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]"
                         >
                           Profile
                         </Link>
                         <Link
-                          to="/profile/create-post"
+                          to="/user/orders"
                           className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]"
                         >
-                          Create Post
+                          Orders
                         </Link>
                         <Link
-                          to="/profile/my-post"
+                          to="/user/address"
                           className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]"
                         >
-                          My Post
-                        </Link>
-                        <Link
-                          to="/profile/pdf-generate"
-                          className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]"
-                        >
-                          PDF Generator
+                          Address
                         </Link>
                       </>
                     )}
@@ -145,10 +145,13 @@ const Navbar = () => {
                         >
                           Profile
                         </Link>
-                        <Link to="/admin/manage-user" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]">
+                        <Link to="/admin/users" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]">
                           Manage User
                         </Link>
-                        <Link to="/admin/manage-blog" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]">
+                        <Link to="/admin/products" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]">
+                          Manage Products
+                        </Link>
+                        <Link to="/admin/blogs" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#FEF2F2]">
                           Manage Blog
                         </Link>
                       </>

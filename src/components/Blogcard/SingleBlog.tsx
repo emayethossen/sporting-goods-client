@@ -71,27 +71,13 @@ const BlogDetails: React.FC = () => {
                     </p>
                 </div>
 
-                <div className="bg-white rounded-lg px-6 space-y-4">
+                {/* <div className="bg-white rounded-lg px-6 space-y-4">
                     <div dangerouslySetInnerHTML={{ __html: blogData.content }} />
                     <div className="flex justify-between items-center text-sm text-gray-500">
                         <p>Author: {blogData.author?.name}</p>
                         <p>Category: {blogData.category}</p>
                     </div>
-
-                    {/* <div className="flex mt-4 justify-between items-center">
-                        <div className="flex items-center text-gray-600 space-x-4">
-                            <div className="flex items-center">
-                                <ThumbsUp className="w-5 h-5 mr-1" />
-                                <span>{blogData.upvotes}</span>
-                            </div>
-                            <div className="flex items-center">
-                                <ThumbsDownIcon className="w-5 h-5 mr-1" />
-                                <span>{blogData.downvotes}</span>
-                            </div>
-                        </div>
-                        <p className="text-sm text-gray-500">Comments: {blogData.comments?.length || 0}</p>
-                    </div> */}
-                </div>
+                </div> */}
             </div>
             <div>
                 Recent Blog

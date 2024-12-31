@@ -24,7 +24,6 @@ const ProductCard = ({ product }: { product: any }) => {
             color2={"#ffd700"}
             edit={false}
           />
-          <p>(98 reviews)</p>
         </div>
 
       </div>

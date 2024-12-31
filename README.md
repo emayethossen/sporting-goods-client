@@ -1,5 +1,7 @@
 # E-Commerce Website
 
+## Live link: https://sports-goods.netlify.app/
+
 An e-commerce website for sporting goods built with React, Redux, TypeScript, Tailwind CSS, NodeJS, ExpressJS, Mongoose and other modern technologies.
 
 ## Table of Contents

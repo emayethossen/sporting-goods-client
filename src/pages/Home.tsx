@@ -2,6 +2,7 @@
 import AllBlogs from "@/components/Blogcard/Latestblog";
 import DiscoverProducts from "@/components/DiscoverProducts/Discoverproducts";
 import FeaturedProducts from "@/components/FeaturedProducts/FeaturedProducts";
+// import HeroSection from "@/components/HeroSection/HeroSection";
 import NewArrivals from "@/components/NewArrival/NewArrival";
 // import ImageGallery from "@/components/ImageGallery/ImageGallery";
 import Newsletter from "@/components/Newsletter/Newsletter";

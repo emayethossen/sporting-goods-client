@@ -19,6 +19,10 @@ import AdminDashboard from "@/pages/admin/AdminDashboard";
 import Dashboard from "@/pages/admin/Dashboard";
 import Profile from "@/pages/admin/Profile";
 import ManageUser from "@/pages/admin/ManageUser";
+import UserDashboard from "@/pages/user/UserDashboard";
+import UserProfile from "@/pages/user/UserProfile";
+import AddressBook from "@/pages/user/AddressBook";
+import UserDashboardOverview from "@/pages/user/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +107,32 @@ const router = createBrowserRouter([
       {
         path: "create-blog",
         element: <CreatePost />,
+      },
+    ]
+  },
+  {
+    path: "/user",
+    element: <UserDashboard />,
+    children:[
+      {
+        path: "dashboard",
+        element: <UserDashboardOverview />,
+      },
+      {
+        path: "profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "orders",
+        element: <ManageBlog />,
+      },
+      {
+        path: "address",
+        element: <AddressBook />,
+      },
+      {
+        path: "wishlist",
+        element: <ManageUser />,
       },
     ]
   },
